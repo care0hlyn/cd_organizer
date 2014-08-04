@@ -1,5 +1,5 @@
 class Artist
-  attr_reader :artist
+  attr_reader :artist, :album
 
   def initialize(release)
     @artist = release[:artist]

@@ -13,4 +13,8 @@ describe Artist do
     expect(new_cd.artist).to eq 'tears for fears'
   end
 
+  it 'adds the album titles' do
+    new_cd = Artist.new({:album => 'songs from the big chair'})
+    expect(new_cd.album).to eq 'songs from the big chair'
+  end
 end
