@@ -2,6 +2,8 @@ require './lib/artist'
 require './lib/album'
 require 'pry'
 
+@selected_artist
+
 def main_menu
 
   puts "Press '1' to add new release."
@@ -62,13 +64,30 @@ def search_artists
   puts "Please enter the artist's name."
 
   artist_name = gets.chomp
-  selected_artist = Artist.all.select { |artist| artist.name == artist_name }.first
+  @selected_artist = Artist.all.select { |artist| artist.name == artist_name }.first
   puts "\n"
-  puts selected_artist.name
+  puts @selected_artist.name
   Artist.albums.each_with_index { |album, index| puts "#{index+1}.#{album.title}" }
+  puts "\n"
+  puts "Would you like to add an album to this artist's repertoire? y/n?"
+  user_decision = gets.chomp
+  if user_decision == 'y'
+    add_new_title
+  else
+    puts "No worries!"
+    main_menu
+  end
+end
 
+def add_new_title
+  puts "Enter new album title here."
+  new_album_title = gets.chomp
+  new_album = Album.new(new_album_title)
+  new_album.save
+  @selected_artist.add_album(new_album)
+  puts "#{new_album.title} has been added successfully to #{@selected_artist.name}'s repertoire."
   puts "\n\n"
-  main_menu
+  artist_menu
 end
 
 def album_menu
