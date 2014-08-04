@@ -5,8 +5,8 @@ require 'pry'
 def main_menu
 
   puts "Press '1' to add new release."
-  puts "Press '2' to list all artists."
-  puts "Press '3' to list all albums."
+  puts "Press '2' to gain access to your artists."
+  puts "Press '3' to gain access to your albums."
   puts "Press 'x' to exit."
 
   user_decision = gets.chomp
@@ -14,9 +14,9 @@ def main_menu
   if user_decision == '1'
     new_release
   elsif user_decision == '2'
-    all_artists
+    artist_menu
   elsif user_decision == '3'
-    all_albums
+    album_menu
   elsif user_decision == 'x'
     puts "Goodbye!"
     exit
@@ -39,8 +39,41 @@ def new_release
   main_menu
 end
 
-def all_artists
-  Artist.all.each {|artist| puts artist.name }
+def artist_menu
+  puts "Press 's' to search for an artist and their albums."
+  puts "Press 'l' to list all artists."
+  puts "Press any other key to return to the main menu."
+
+  user_decision = gets.chomp
+
+  if user_decision == 's'
+    search_artists
+  elsif user_decision == 'l'
+    Artist.all.each {|artist| puts artist.name }
+    artist_menu
+  else
+    puts "Returning to main menu...\n\n"
+    main_menu
+  end
+end
+
+
+def album_menu
+  puts "Press 's' to search for an album and its artist."
+  puts "Press 'l' to list all albums"
+  puts "Press any other key to return to the main menu."
+
+  user_decision = gets.chomp
+
+  if user_decision == 's'
+    search_albums
+  elsif user_decision == 'l'
+    Album.all.each { |album| puts album.title }
+    album_menu
+  else
+    puts "Returning to main menu... \n\n"
+    main_menu
+  end
 end
 
 
