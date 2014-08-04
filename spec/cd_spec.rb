@@ -8,10 +8,10 @@ describe Artist do
     expect(new_cd).to be_an_instance_of Artist
   end
 
-  # it 'adds the artist name' do
-  #   new_cd = Artist.new({:artist => 'tears for fears'})
-  #   expect(new_cd.artist).to eq 'tears for fears'
-  # end
+  it 'adds the artist name' do
+    new_cd = Artist.new({:artist => 'tears for fears'})
+    expect(new_cd.artist).to eq 'tears for fears'
+  end
 
   # it 'adds the album titles' do
   #   new_cd = Artist.new({:album => 'songs from the big chair'})

@@ -2,10 +2,9 @@ class Artist
   attr_reader :artist, :albums
 
   def initialize(release)
-    @name = release[:name]
+    @artist = release[:artist]
     @albums = []
   end
-  # end
 
   # def Artist.all_artists
   #   @@all_artists
