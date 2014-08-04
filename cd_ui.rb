@@ -63,8 +63,10 @@ def search_artists
 
   artist_name = gets.chomp
   selected_artist = Artist.all.select { |artist| artist.name == artist_name }.first
+  puts "\n"
+  puts selected_artist.name
+  Artist.albums.each_with_index { |album, index| puts "#{index+1}.#{album.title}" }
 
-  selected_artist.Album.all.each_with_index { |album, index| puts "#{index+1}. #{album.title}" }
   puts "\n\n"
   main_menu
 end
