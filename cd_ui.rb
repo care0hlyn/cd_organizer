@@ -1,4 +1,6 @@
 require './lib/artist'
+require './lib/album'
+require 'pry'
 
 def main_menu
 
@@ -24,7 +26,22 @@ def main_menu
 end
 
 def new_release
-  puts "Please enter an artist's name"
+  puts "Please enter an artist's name."
+  artist_name = gets.chomp
+  new_artist = Artist.new({:name => artist_name})
+  new_artist.save
+  puts "Please enter #{new_artist.name}'s album title."
+  input_album = gets.chomp
+  new_album = Album.new(input_album)
+  new_album.save
+  puts "You've added #{new_artist.name}: #{new_album.title} to your organizer!"
+  puts "Returning to the main_menu...\n\n"
+  main_menu
 end
+
+def all_artists
+  Artist.all.each {|artist| puts artist.name }
+end
+
 
 main_menu

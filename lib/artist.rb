@@ -2,8 +2,8 @@ class Artist
   attr_reader :name, :artists
     @@artists = []
 
-  def initialize(name)
-    @name = name[:artist]
+  def initialize(attributes)
+    @name = attributes[:name]
   end
 
   def Artist.all
@@ -14,17 +14,6 @@ class Artist
     @@artists << self
   end
 
-
-  # def Artist.all_artists
-  #   @@all_artists
-  # end
-
-  # def all_albums
-  #   @@all_albums
-  # end
 end
 
-# my_album = Album.new('name of album')
-# my_artist = Artist.new(:artist => 'Paul McCartney')
 
-# my_artist.add_album(my_album)
