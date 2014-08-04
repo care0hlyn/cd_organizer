@@ -34,6 +34,7 @@ def new_release
   input_album = gets.chomp
   new_album = Album.new(input_album)
   new_album.save
+  new_artist.add_album(new_album)
   puts "You've added #{new_artist.name}: #{new_album.title} to your organizer!"
   puts "Returning to the main_menu...\n\n"
   main_menu
@@ -49,7 +50,7 @@ def artist_menu
   if user_decision == 's'
     search_artists
   elsif user_decision == 'l'
-    Artist.all.each {|artist| puts artist.name }
+    Artist.all.each_with_index {|artist, index| puts "#{index+1}. #{artist.name}" }
     artist_menu
   else
     puts "Returning to main menu...\n\n"
@@ -57,6 +58,16 @@ def artist_menu
   end
 end
 
+def search_artists
+  puts "Please enter the artist's name."
+
+  artist_name = gets.chomp
+  selected_artist = Artist.all.select { |artist| artist.name == artist_name }.first
+
+  selected_artist.Album.all.each_with_index { |album, index| puts "#{index+1}. #{album.title}" }
+  puts "\n\n"
+  main_menu
+end
 
 def album_menu
   puts "Press 's' to search for an album and its artist."
@@ -68,13 +79,20 @@ def album_menu
   if user_decision == 's'
     search_albums
   elsif user_decision == 'l'
-    Album.all.each { |album| puts album.title }
+    Album.all.each_with_index { |album, index| puts "#{index+1}. #{album.title}" }
     album_menu
   else
     puts "Returning to main menu... \n\n"
     main_menu
   end
+
 end
+
+# def search_albums
+#   puts "Enter artist:"
+
+
+
 
 
 main_menu

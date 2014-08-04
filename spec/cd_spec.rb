@@ -4,21 +4,27 @@ require 'album'
 
 describe Artist do
   it 'initializes with a hash containing an artist(key) and empty array for albums' do
-    new_artist = Artist.new({:artist => 'tears for fears', :album => []})
+    new_artist = Artist.new({:name => 'tears for fears', :albums => []})
     expect(new_artist).to be_an_instance_of Artist
   end
 
   it 'adds the artist name' do
-    new_artist = Artist.new({:artist => 'tears for fears'})
+    new_artist = Artist.new({:name => 'tears for fears'})
     expect(new_artist.name).to eq 'tears for fears'
   end
 
   it 'lists all the artists out in an array' do
-    new_artist = Artist.new({:artist => 'tears for fears'})
-    new_artist1 = Artist.new({:artist => 'tom petty'})
+    new_artist = Artist.new({:name => 'tears for fears'})
+    new_artist1 = Artist.new({:name => 'tom petty'})
     new_artist.save
     new_artist1.save
     expect(Artist.all).to eq [new_artist, new_artist1]
+  end
+
+  it 'adds an album to an associated artist' do
+    new_artist = Artist.new({:name => 'tears for fears'})
+    new_album = Album.new('songs from the big chair')
+    expect(new_artist.add_album(new_album)).to eq [new_album]
   end
 end
 

@@ -11,7 +11,7 @@ class Album
   end
 
   def Album.all
-    @@albums
+    @@albums.sort_by! { |album| album.title.capitalize }
   end
 
   def save
@@ -19,6 +19,7 @@ class Album
   end
 
 end
+
 
 
 # "What is the artist name?"
