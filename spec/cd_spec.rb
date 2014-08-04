@@ -4,20 +4,39 @@ require 'album'
 
 describe Artist do
   it 'initializes with a hash containing an artist(key) and empty array for albums' do
-    new_cd = Artist.new({:artist => 'tears for fears', :album => []})
-    expect(new_cd).to be_an_instance_of Artist
+    new_artist = Artist.new({:artist => 'tears for fears', :album => []})
+    expect(new_artist).to be_an_instance_of Artist
   end
 
   it 'adds the artist name' do
-    new_cd = Artist.new({:artist => 'tears for fears'})
-    expect(new_cd.artist).to eq 'tears for fears'
+    new_artist = Artist.new({:artist => 'tears for fears'})
+    expect(new_artist.name).to eq 'tears for fears'
+  end
+end
+
+describe Album do
+  it 'initalizes with a title and an empty array to push the title into' do
+    new_album = Album.new('songs from the big chair')
+    expect(new_album).to be_an_instance_of Album
   end
 
-  # it 'adds the album titles' do
-  #   new_cd = Artist.new({:album => 'songs from the big chair'})
-  #   expect(new_cd.album).to eq 'songs from the big chair'
-  # end
+  it 'reads album title back' do
+    new_album = Album.new('songs from the big chair')
+    expect(new_album.title).to eq 'songs from the big chair'
+  end
 
+  describe '#save' do
+    it 'adds the album title to the empty array' do
+      new_album = Album.new('songs from the big chair')
+      new_album.save
+      expect(Album.all).to eq [new_album]
+    end
+  end
+  # it 'adds the album titles to correct artist object' do
+  #   new_artist = Artist.new({:artist => 'tears for fears'})
+  #   new_album = Album.new('songs from the big chair')
+  #   expect(new_artist.add_album).to eq ['songs from the big chair']
+end
   # it 'starts with an empty array' do
   #   new_cd = Artist.new({:artist => 'tears for fears'})
   #   expect(new_cd.all_artists).to eq []
@@ -35,4 +54,4 @@ describe Artist do
   #   expect(new_cd.all_artists).to eq ['tears for fears', 'peter frampton', 'tom petty']
   # end
 
-end
+
