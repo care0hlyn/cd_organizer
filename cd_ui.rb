@@ -90,10 +90,21 @@ def album_menu
 
 end
 
-# def search_albums
-#   puts "Enter artist:"
+def search_albums
+  puts "Please enter the album name."
 
+  album_name = gets.chomp
 
+  Album.all.each do |album|
+    if album.title == album_name
+      puts "#{album_name} exists in your organizer."
+      album_menu
+    else
+      puts "#{album_name} does not exist."
+      main_menu
+    end
+  end
+end
 
 
 
