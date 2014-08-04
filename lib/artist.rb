@@ -4,8 +4,16 @@ class Artist
 
   def initialize(name)
     @name = name[:artist]
+  end
+
+  def Artist.all
+    @@artists
+  end
+
+  def save
     @@artists << self
   end
+
 
   # def Artist.all_artists
   #   @@all_artists

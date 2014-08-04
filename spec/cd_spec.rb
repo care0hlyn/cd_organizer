@@ -12,6 +12,14 @@ describe Artist do
     new_artist = Artist.new({:artist => 'tears for fears'})
     expect(new_artist.name).to eq 'tears for fears'
   end
+
+  it 'lists all the artists out in an array' do
+    new_artist = Artist.new({:artist => 'tears for fears'})
+    new_artist1 = Artist.new({:artist => 'tom petty'})
+    new_artist.save
+    new_artist1.save
+    expect(Artist.all).to eq [new_artist, new_artist1]
+  end
 end
 
 describe Album do
